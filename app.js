@@ -29,7 +29,7 @@ const swaggerDocs = swaggerJsDoc(swaggerOptions);
 
 const router = require('./src/container/routes');
 
-require('./src/connections/mongoose');
+//require('./src/connections/mongoose');
 
 const app = express();
 

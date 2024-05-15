@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const constants = require('./constants');
 const STATUS_CODES = require('./statusCodes');
 const bcrypt = require('bcryptjs');
-const translationFacade = require('../container/translation/translation.facade')
+
 
 module.exports = {
     hashPassword(password) {
@@ -56,15 +56,15 @@ module.exports = {
         const {message = 'success', payload = {}} = body;
         return res.status(STATUS_CODES.OK).json({success: true, message, payload})
     },
-    errorResponse: async (req, res, err) => {
-        const {headers: {ln = 'en'} = {}} = req;
-        let message = err.statusCode ? err.message : 'internal_error';
-        let result = await translationFacade.findOne({slug: message});
-        if (result) message = result['message'][ln] ? result['message'][ln] : result['message']['en'] ? result['message']['en'] : message;
-        if (err.statusCode) {
-            return res.status(err.statusCode).json({success: false, message});
-        }
-        console.error(err);
-        return res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({success: false, message});
-    }
+    // errorResponse: async (req, res, err) => {
+    //     const {headers: {ln = 'en'} = {}} = req;
+    //     let message = err.statusCode ? err.message : 'internal_error';
+    //     let result = await translationFacade.findOne({slug: message});
+    //     if (result) message = result['message'][ln] ? result['message'][ln] : result['message']['en'] ? result['message']['en'] : message;
+    //     if (err.statusCode) {
+    //         return res.status(err.statusCode).json({success: false, message});
+    //     }
+    //     console.error(err);
+    //     return res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({success: false, message});
+    // }
 };

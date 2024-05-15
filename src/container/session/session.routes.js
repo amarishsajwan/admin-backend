@@ -1,8 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const controller = require('./session.controller');
-const {jwtTokenVerify} = require('../../middleware/authorize');
-
 router.route('/login')
     .post(controller.login)
 
@@ -62,72 +60,6 @@ router.route('/login')
  *         description: UNAUTHORIZED
  *       '500':
  *         description: INTERNAL SERVER ERROR
- */
-
-
-router.route('/otp')
-    .post(controller.otpLogin);
-/**
- * @swagger
- *
- * /api/v1/session/otp:
- *  post:
- *    tags:
- *        - Session
- *    summary: "Get login otp"
- *    consumes:
- *      - application/x-www-form-urlencoded
- *    parameters:
- *       - in: formData
- *         name: country_code
- *         type: string
- *         required: true
- *
- *       - in: formData
- *         name: contact_no
- *         type: string
- *         required: true
- *
- *       - in: formData
- *         name: platform
- *         type: string
- *         required: true
- *         enum: [IOS, ANDROID]
- *
- *    responses:
- *       '200':
- *         description: SUCCESS
- *       '400':
- *         description: BAD REQUEST
- *       '401':
- *         description: UNAUTHORIZED
- *       '500':
- *         description: INTERNAL SERVER ERROR
- */
-
-
-router.route('/logout')
-    .get(jwtTokenVerify, controller.logout);
-
-/**
- * @swagger
- *
- * /api/v1/session/logout:
- *  get:
- *    tags:
- *        - Session
- *    summary: "session logout"
- *    responses:
- *       '200':
- *         description: SUCCESS
- *       '400':
- *         description: BAD REQUEST
- *       '401':
- *         description: UNAUTHORIZED
- *       '500':
- *         description: INTERNAL SERVER ERROR
- *    security:
- *       - bearerAuth: []
  */
 
 module.exports = router;

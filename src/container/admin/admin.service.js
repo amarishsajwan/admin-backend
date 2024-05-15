@@ -1,7 +1,5 @@
 const {ObjectId} = require('mongodb');
 const facade = require('./admin.facade');
-const tokenFacade = require('../token/token.facade');
-const otpService = require('../otp/otp.service');
 const exceptionHandler = require('../../utils/exceptionHandler');
 const validator = require('./admin.validator');
 const helpers = require('../../utils/helpers');
